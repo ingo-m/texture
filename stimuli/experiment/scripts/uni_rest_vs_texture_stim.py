@@ -53,7 +53,7 @@ varPixY = 1200  # [1200.0] for 7T scanner
 varHitTme = 2.0
 
 # Pixel intensity of uniform background (rest):
-lstClrBckrgd = [0.0, 0.0, 0.0]
+lstClrBckrgd = [-0.71, -0.71, -0.71]
 # -----------------------------------------------------------------------------
 
 
