@@ -104,21 +104,24 @@ aryRndnS = np.around(aryRndnS).astype(np.uint8)
 varDiff = np.subtract(varPixSqr, varPixBcgrd)
 
 # Add difference to respective section of random array:
-aryTmp = aryRndn[varSqrPosY1:varSqrPosY2, varSqrPosX1:varSqrPosX2]
-aryTmp = np.add(aryTmp, varDiff)
-aryRndn[varSqrPosY1:varSqrPosY2, varSqrPosX1:varSqrPosX2] = aryTmp
+#arySqr = aryRndn[varSqrPosY1:varSqrPosY2, varSqrPosX1:varSqrPosX2]
+arySqr = np.add(aryRndn, varDiff)
 
-# Apply filter; array for square on texture:
-arySqrS = uniform_filter(aryRndn, size=varUniFlt)
+# Apply filter; separately for square and texture background:
+arySqrS = uniform_filter(arySqr, size=varUniFlt)
+aryBckgS = uniform_filter(aryRndn, size=varUniFlt)
+
+# Place square on texture:
+aryBckgS[varSqrPosY1:varSqrPosY2, varSqrPosX1:varSqrPosX2] = arySqrS[varSqrPosY1:varSqrPosY2, varSqrPosX1:varSqrPosX2]
 
 # Avoid out of range values (set to back or white accordingly):
-aryLgc = np.less(arySqrS, 0.0)
-arySqrS[aryLgc] = 0.0
-aryLgc = np.greater(arySqrS, 255.0)
-arySqrS[aryLgc] = 255.0
+aryLgc = np.less(aryBckgS, 0.0)
+aryBckgS[aryLgc] = 0.0
+aryLgc = np.greater(aryBckgS, 255.0)
+aryBckgS[aryLgc] = 255.0
 
 # Cast to interget:
-arySqrS = np.around(arySqrS).astype(np.uint8)
+aryBckgS = np.around(aryBckgS).astype(np.uint8)
 
 # -----------------------------------------------------------------------------
 # *** Save texture
@@ -133,7 +136,7 @@ objImg.save(strPthOut.format(str(np.around(varPixBcgrd)).split('.')[0],
                              ''))
 
 # Create image - square on texture:
-objImg = Image.fromarray(arySqrS, mode='L')
+objImg = Image.fromarray(aryBckgS, mode='L')
 
 # Save image to disk - square on texture:
 objImg.save(strPthOut.format(str(np.around(varPixBcgrd)).split('.')[0],
