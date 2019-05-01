@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-   #noqa
 """
-Experimental stimuli for Kanizsa project, to be run in Psychopy.
+Texture square on texture background.
+
+Experimental stimuli for Texture control experiment, to be run in Psychopy.
 """
 
 # Part of py_pRF_mapping library
-# Copyright (C) 2017 Marian Schneider & Ingo Marquardt
+# Copyright (C) 2018 Marian Schneider & Ingo Marquardt
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -29,10 +31,9 @@ from psychopy import visual, core, monitors, logging, event, gui, data
 
 # #############################################################################
 #                         --- Conditions ---                                  #
-# Static Kanizsa square      if varTmpEvntType == 3                           #
-# Static Rotated Kanizsa     if varTmpEvntType == 4                           #
-# Flickering Kanizsa square  if varTmpEvntType == 5                           #
-# Flickering Rotated Kanizsa if varTmpEvntType == 6                           #
+# Texture background                                 if varTmpEvntType == 1   #
+# Target                                             if varTmpEvntType == 2   #
+# Texture square on texture background               if varTmpEvntType > 2    #
 # #############################################################################
 
 # Length of target events [s]:
@@ -47,42 +48,6 @@ varPixX = 1920  # [1920.0] for 7T scanner
 # Height of monitor [pixels]:
 varPixY = 1200  # [1200.0] for 7T scanner
 
-# Size (diameter) of Kanizsa inducers (Pac-Man) [degree of visual angle]:
-varKnzSze = 3.0
-
-# Position (x & y displacement from origin) of Kanizsa inducers (Pac-Man)
-# [degree of visual angle]:
-lstPosKnz = [(-6.0, 3.0),
-             (-0.5, 3.0),
-             (-6.0, -3.0),
-             (-0.5, -3.0)]
-
-# Stimulus duration [s] of inducer stimuli in flicker condition. In Kok et al.
-# (2016), the Kanizsa inducer stimuli alternate with full disks at a frequency
-# of 1 Hz (i.e. 500 ms Kanizsa inducer, 500 ms full disk). To reproduce this
-# condition, set `varFlkr = 0.5`.
-varFlkr = 0.5
-
-# Luminance of the stimuli and background is matched to Kok and Lange (2014).
-#
-# Kok, P., & de Lange, F. P. (2014). Shape perception simultaneously up- and
-# downregulates neural activity in the primary visual cortex.
-#
-# Luminance of bright stimuli is 246 [cd / m^2], corresponding to a psychopy
-# pixel intensity of -0.26.
-#
-# Luminance of dark stimuli is 0.43 [cd / m^2], corresponding to a psychopy
-# pixel intensity of -0.82.
-#
-# The conversion from pixel intensity to luminance is based on a luminance
-# measurement performed on 13.09.2018.
-
-# Background colour:
-lstBckgrd = [-0.26, -0.26, -0.26]
-
-# Pac-Man colour:
-lstKnzClr = [-0.82, -0.82, -0.82]
-
 # Time (in seconds) that participants have to respond to a target event in
 # order for the event to be logged as a hit:
 varHitTme = 2.0
@@ -93,7 +58,7 @@ varHitTme = 2.0
 # *** GUI
 
 # Name of the experiment:
-strExpNme = 'Kanizsa'
+strExpNme = 'Texture_square_on_texture_background'
 
 # Get date string as default session name:
 strDate = str(datetime.datetime.now())
@@ -252,7 +217,7 @@ objWin = visual.Window(
     allowStencil=True,
     fullscr=True,
     monitor=objMon,
-    color=lstBckgrd,
+    color=[0.0, 0.0, 0.0],
     colorSpace='rgb',
     units='deg',
     blendMode='avg'
@@ -263,280 +228,36 @@ objWin = visual.Window(
 # -----------------------------------------------------------------------------
 # *** Experimental stimuli
 
-# (1a) Kaniza stimulus - upper left:
-objKnz01 = visual.RadialStim(
-    win=objWin,
-    mask=None,
+# Path to PNG file containing background image:
+strPthBckgrd = (strPthPrnt
+                + os.path.sep
+                + 'miscellanea'
+                + os.path.sep
+                + 'random_texture_mne_37_sd_60_fltr_6.png')
+
+# Random noise texture background:
+objBckgrd = visual.ImageStim(
+    objWin,
+    image=strPthBckgrd,
     units='deg',
-    pos=lstPosKnz[0],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=180.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
+    pos=(0.0, 0.0),
     interpolate=False,
-    autoLog=False,
     )
 
-# (2a) Kaniza stimulus - upper right:
-objKnz02 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[1],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=270.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
+# Path to PNG file containing texture square on texture background:
+strPthSqr = (strPthPrnt
+             + os.path.sep
+             + 'miscellanea'
+             + os.path.sep
+             + 'random_texture_mne_37_sd_60_fltr_6_sqr_128.png')
 
-# (3a) Kaniza stimulus - lower left:
-objKnz03 = visual.RadialStim(
-    win=objWin,
-    mask=None,
+# Random noise texture background:
+objSqr = visual.ImageStim(
+    objWin,
+    image=strPthSqr,
     units='deg',
-    pos=lstPosKnz[2],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=90.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
+    pos=(0.0, 0.0),
     interpolate=False,
-    autoLog=False,
-    )
-
-# (4a) Kaniza stimulus - lower right:
-objKnz04 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[3],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (1b) Rotated Kaniza stimulus - upper left:
-objKnzRot01 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[0],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (2b) Rotated Kaniza stimulus - upper right:
-objKnzRot02 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[1],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=90.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (3b) Rotated Kaniza stimulus - lower left:
-objKnzRot03 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[2],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=270.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (4b) Rotated Kaniza stimulus - lower right:
-objKnzRot04 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[3],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=180.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 270.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (1a) Full disk - upper left:
-objFll01 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[0],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 360.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (2a) Full disk - upper right:
-objFll02 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[1],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 360.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (3a) Full disk - lower left:
-objFll03 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[2],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 360.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
-    )
-
-# (4a) Full disk - lower right:
-objFll04 = visual.RadialStim(
-    win=objWin,
-    mask=None,
-    units='deg',
-    pos=lstPosKnz[3],
-    size=varKnzSze,
-    radialCycles=0,
-    angularCycles=0,
-    radialPhase=0.0,
-    angularPhase=0.0,
-    ori=0.0,
-    texRes=64,
-    angularRes=360,
-    visibleWedge=(0.0, 360.0),
-    colorSpace='rgb',
-    color=lstKnzClr,
-    opacity=1.0,
-    contrast=-1.0,
-    interpolate=False,
-    autoLog=False,
     )
 
 # Fixation dot:
@@ -591,25 +312,6 @@ objTarget = visual.Circle(
 
 # -----------------------------------------------------------------------------
 # *** Auxiliary stimuli
-
-# Message:
-# objTxtWlcm = visual.TextStim(objWin,
-#                              text='Please wait a moment.',
-#                              font="Courier New",
-#                              pos=(0.0, 0.0),
-#                              color=[1.0, 1.0, 1.0],
-#                              colorSpace='rgb',
-#                              opacity=1.0,
-#                              contrast=1.0,
-#                              ori=0.0,
-#                              height=0.8,
-#                              antialias=True,
-#                              alignHoriz='center',
-#                              alignVert='center',
-#                              flipHoriz=False,
-#                              flipVert=False,
-#                              autoLog=False
-#                              )
 
 # Timer (only displayed in testing mode):
 if lgcTest:
@@ -716,6 +418,9 @@ def func_exit():
 # -----------------------------------------------------------------------------
 # *** Presentation
 
+# Draw background:
+objBckgrd.draw(win=objWin)
+
 # Draw fixation dot:
 objFixSrd.draw(win=objWin)
 objFix.draw(win=objWin)
@@ -785,6 +490,9 @@ for idx01 in range(varNumEvnts):  #noqa
 
         # Continue with the rest block?
         while varTme02 < (varTme01 + varTmpEvntStrt + varTmpEvntDur):
+
+            # Draw background:
+            objBckgrd.draw(win=objWin)
 
             # Draw fixation dot:
             objFixSrd.draw(win=objWin)
@@ -933,78 +641,12 @@ for idx01 in range(varNumEvnts):  #noqa
         # Switch target (show target or not?):
         varSwtTrgt = 0
 
-        # Switch for flicker:
-        varSwtFlkr = True
-
-        # Timer for flicker:
-        varTme05 = objClck.getTime()
 
         # Continue with the stimulus block?
         while varTme02 < (varTme01 + varTmpEvntStrt + varTmpEvntDur):
 
-            # Draw static Kanizsa square:
-            if (varTmpEvntType == 3):
-                objKnz01.draw(win=objWin)
-                objKnz02.draw(win=objWin)
-                objKnz03.draw(win=objWin)
-                objKnz04.draw(win=objWin)
-
-            # Draw static rotated Kanizsa squares:
-            elif (varTmpEvntType == 4):
-                objKnzRot01.draw(win=objWin)
-                objKnzRot02.draw(win=objWin)
-                objKnzRot03.draw(win=objWin)
-                objKnzRot04.draw(win=objWin)
-
-            # Draw flickering Kanizsa square:
-            elif (varTmpEvntType == 5):
-                if varSwtFlkr:
-                    # Draw Kanizsa square:
-                    objKnz01.draw(win=objWin)
-                    objKnz02.draw(win=objWin)
-                    objKnz03.draw(win=objWin)
-                    objKnz04.draw(win=objWin)
-                else:
-                    # Draw full disks:
-                    objFll01.draw(win=objWin)
-                    objFll02.draw(win=objWin)
-                    objFll03.draw(win=objWin)
-                    objFll04.draw(win=objWin)
-
-                # Time to switch flicker?
-                if varTme02 >= (varTme05 + varFlkr):
-                    # Flip the switch:
-                    if varSwtFlkr:
-                        varSwtFlkr = False
-                    else:
-                        varSwtFlkr = True
-                    # Remember time of switch:
-                    varTme05 = objClck.getTime()
-
-            # Draw flickering rotated Kanizsa squares:
-            elif (varTmpEvntType == 6):
-                if varSwtFlkr:
-                    # Draw Kanizsa square:
-                    objKnzRot01.draw(win=objWin)
-                    objKnzRot02.draw(win=objWin)
-                    objKnzRot03.draw(win=objWin)
-                    objKnzRot04.draw(win=objWin)
-                else:
-                    # Draw full disks:
-                    objFll01.draw(win=objWin)
-                    objFll02.draw(win=objWin)
-                    objFll03.draw(win=objWin)
-                    objFll04.draw(win=objWin)
-
-                # Time to switch flicker?
-                if varTme02 >= (varTme05 + varFlkr):
-                    # Flip the switch:
-                    if varSwtFlkr:
-                        varSwtFlkr = False
-                    else:
-                        varSwtFlkr = True
-                    # Remember time of switch:
-                    varTme05 = objClck.getTime()
+            # Draw square:
+            objSqr.draw(win=objWin)
 
             # Draw fixation dot:
             objFixSrd.draw(win=objWin)
@@ -1135,7 +777,7 @@ for idx01 in range(varNumEvnts):  #noqa
             varTme02 = objClck.getTime()
 
         # Log end of stimulus block:
-        strTmp = ('STIMULUS end of event ' + unicode(idx01 + 1))
+        strTmp = ('STIMULUS end of event ' + str(idx01 + 1))
         logging.data(strTmp)
 # -----------------------------------------------------------------------------
 
