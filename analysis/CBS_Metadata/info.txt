@@ -1,0 +1,28 @@
+-------------------------------------------------------------------------------
+*file_list_version_01.txt
+
+Control experiment, with two conditions in separate runs.
+
+(1) A light grey texture square presented on a dark texture background. The
+    texture of the background and of the light grey square was identical, only
+    the luminance differed. In other words, this condition tests for the effect
+    of luminance, keeping texture constant. The area of the central bright
+    square is matched to the area of the Pac-Man (in the Pac-Man study).
+
+(2) In the second condition, a uniform dark grey background constituted the rest
+    condition. The stimulus was a full-screen, dark grey texture pattern with
+    the same mean luminance as the uniform rest condition. In other words, this
+    condition tests for an effect of texture, irrespective of luminance.
+
+The analysis pipeline is largely adapted from control experiments 20181128
+and 20190207 (some aspects are redundant).
+
+pRF overlap with ROIs: square_centre, square_edge, background, (diamond),
+                       pacman_centre, pacman_edge
+
+for experimental conditions: bright_square_txtr, full_screen_txtr
+
+(Diamond and PacMan ROIs are redundant.)
+
+Subject 20190502.
+-------------------------------------------------------------------------------
