@@ -60,14 +60,14 @@ fi
 #------------------------------------------------------------------------------
 # *** Copy functional data
 
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_pRF_01_RL_SERIES_008_c32 ${strFunc}func_01
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_pRF_02_RL_SERIES_010_c32 ${strFunc}func_02
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_01_RL_SERIES_012_c32 ${strFunc}func_03
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_02_RL_SERIES_014_c32 ${strFunc}func_04
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_03_RL_SERIES_022_c32 ${strFunc}func_05
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_04_RL_SERIES_024_c32 ${strFunc}func_06
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_05_RL_SERIES_026_c32 ${strFunc}func_07
-fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_06_RL_SERIES_028_c32 ${strFunc}func_08
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_01_RL_SERIES_008_c32 ${strFunc}func_01
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_02_RL_SERIES_010_c32 ${strFunc}func_02
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_03_RL_SERIES_018_c32 ${strFunc}func_03
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_04_RL_SERIES_020_c32 ${strFunc}func_04
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_05_RL_SERIES_022_c32 ${strFunc}func_05
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_06_RL_SERIES_024_c32 ${strFunc}func_06
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_07_RL_SERIES_026_c32 ${strFunc}func_07
+fslreorient2std ${strRaw}PROTOCOL_BP_ep3d_bold_func_08_RL_SERIES_028_c32 ${strFunc}func_08
 #------------------------------------------------------------------------------
 
 
@@ -82,10 +82,10 @@ fslreorient2std ${strRaw}PROTOCOL_cmrr_mbep2d_se_RL_SERIES_006_c32 ${strSe}func_
 #------------------------------------------------------------------------------
 # *** Copy mp2rage images
 
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_inv1
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_inv1_phase
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_017_c32 ${strAnat}mp2rage_t1
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_018_c32 ${strAnat}mp2rage_uni
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_019_c32 ${strAnat}mp2rage_pdw
-fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_020_c32 ${strAnat}mp2rage_pdw_phase
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_011_c32 ${strAnat}mp2rage_inv1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_012_c32 ${strAnat}mp2rage_inv1_phase
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_013_c32 ${strAnat}mp2rage_t1
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_014_c32 ${strAnat}mp2rage_uni
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_015_c32 ${strAnat}mp2rage_pdw
+fslreorient2std ${strRaw}PROTOCOL_mp2rage_0.7_iso_p2_SERIES_016_c32 ${strAnat}mp2rage_pdw_phase
 #------------------------------------------------------------------------------
