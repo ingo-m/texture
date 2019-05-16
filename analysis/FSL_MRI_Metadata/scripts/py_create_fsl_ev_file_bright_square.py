@@ -88,6 +88,15 @@ for idxRun in range(0, varNumRuns):
         varTmpCount = 0
         for idxTrial in range(0, varNumTrial):
             varTmp = aryData[idxTrial, 0]
+
+            # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            # Adjustment for control experiment 20190502 - the design matrix
+            # contains 4 event types, but only one stimulus was presented
+            # (all event types >= 3 were stimulus blocks).
+            if (3 <= varTmp):
+                varTmp = 3
+            # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
             if int(idxCon + 1) == varTmp:
                 varTmpCount = varTmpCount + 1
         print('------Number of occurences of event: ' + str(varTmpCount))
@@ -103,6 +112,15 @@ for idxRun in range(0, varNumRuns):
             # Check whether the current lines corresponds to the current event
             # type (first column of the event matrix):
             varTmp = aryData[idxTrial, 0]
+
+            # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            # Adjustment for control experiment 20190502 - the design matrix
+            # contains 4 event types, but only one stimulus was presented
+            # (all event types >= 3 were stimulus blocks).
+            if (3 <= varTmp):
+                varTmp = 3
+            # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
             # The variable 'idxCon' starts at one, so we have to add one in
             # order to check whether the current line corresponds to the event
             # type:
