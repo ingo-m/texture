@@ -16,8 +16,8 @@ arySessionIDs=(func_01 \
                func_04 \
                func_05 \
                func_06 \
-               prf_01 \
-               prf_02)
+               func_07 \
+               func_08)
 
 # Parent path:
 strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
@@ -26,7 +26,7 @@ strPathParent="${pacman_data_path}${pacman_sub_id}/nii/"
 strPathInputMain="${strPathParent}feat_level_1_comb/"
 
 # Path of feat directorie, pRF mapping:
-strPathInputPrf="${strPathParent}feat_level_1_prf/"
+# strPathInputPrf="${strPathParent}feat_level_1_prf/"
 
 # Output directory:
 strPathOutput="${strPathParent}func_reg_tsnr/"

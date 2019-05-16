@@ -23,10 +23,8 @@ arySubIDs=(${pacman_sub_id})
 strIn="${pacman_data_path}SUBJECT_ID/nii/func_reg_averages/"
 
 # Input file names (within parent directory):
-aryNiiIn=(ERA_Kanizsa_Static \
-          ERA_Rotated_Static \
-          ERA_Kanizsa_Flicker \
-          ERA_Rotated_Flicker)
+aryNiiIn=(ERA_bright_square_txtr \
+          ERA_full_screen_txtr)
 
 # Output parent directory ('SUBJECT_ID' will be replaced):
 strOt="${pacman_data_path}SUBJECT_ID/nii/func_reg_averages/"
