@@ -185,15 +185,15 @@ echo "---Automatic: 1st level FSL FEAT with sustained & transient predictors."
 source ${strPathPrnt}02_feat/n_02_feat_level_1_script_parallel_comb.sh
 date
 
-echo "---Automatic: 1st level FSL FEAT preprocessing - pRF runs."
-source ${strPathPrnt}02_feat/n_03_feat_level_1_script_parallel_prf.sh
-date
+# +++ No within session pRF data for session 20190502 +++
+# echo "---Automatic: 1st level FSL FEAT preprocessing - pRF runs."
+# source ${strPathPrnt}02_feat/n_03_feat_level_1_script_parallel_prf.sh
+# date
 #-------------------------------------------------------------------------------
 
 
 #-------------------------------------------------------------------------------
 # ### Intermediate steps
-
 
 echo "---Automatic: Calculate tSNR maps."
 source ${strPathPrnt}03_intermediate_steps/n_01_sh_tSNR.sh
@@ -210,14 +210,6 @@ date
 
 echo "---Automatic: Create event related averages."
 python ${strPathPrnt}03_intermediate_steps/n_03b_py_evnt_rltd_avrgs.py
-date
-
-echo "---Automatic: Create event related averages."
-python ${strPathPrnt}03_intermediate_steps/n_03c_py_evnt_rltd_avrgs.py
-date
-
-echo "---Automatic: Create event related averages."
-python ${strPathPrnt}03_intermediate_steps/n_03d_py_evnt_rltd_avrgs.py
 date
 
 echo "---Automatic: Prepare depth-sampling of event related averages."

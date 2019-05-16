@@ -2,35 +2,21 @@ level_1_fsf_comb:
 
 Feat analysis with sustained and transient predictors.
 
-level_1_fsf_prf:
+Design matrices (EV files):
 
-Preprocessing (high pass temporal filtering) only.
+For sustained response:
+/home/john/PhD/GitLab/texture/analysis/FSL_MRI_Metadata/version_01/
+
+For transient resposne:
+/home/john/PhD/GitLab/texture/analysis/FSL_MRI_Metadata/version_01_transients/
+
+(No within-session pRF data.)
 
 GLM predictors:
 
-kanizsa_static_sst
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Kanizsa_Static.txt
 
-kanizsa_static_trn
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01_transients/EV_func_01_Kanizsa_Static.txt
 
-rotated_static_sst
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Rotated_Static.txt
 
-rotated_static_trn
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01_transients/EV_func_01_Rotated_Static.txt
-
-kanizsa_flicker_sst
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Kanizsa_Flicker.txt
-
-kanizsa_flicker_trn
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01_transients/EV_func_01_Kanizsa_Flicker.txt
-
-rotated_flicker_sst
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Rotated_Flicker.txt
-
-rotated_flicker_trn
-PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01_transients/EV_func_01_Rotated_Flicker.txt
 
 target
 PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Target.txt

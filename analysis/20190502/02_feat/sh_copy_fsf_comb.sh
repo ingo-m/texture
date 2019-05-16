@@ -20,7 +20,7 @@
 # Define session IDs & paths:
 
 # Parent path:
-strPathParent="/home/john/PhD/GitLab/kanizsa/analysis/20190213/02_feat/level_1_fsf_comb/"
+strPathParent="/home/john/PhD/GitLab/texture/analysis/20190502/02_feat/level_1_fsf_comb/"
 
 # Array with the file names of the fsf file (first entry = existing fsf file)
 arySessionIDs01=(feat_level_1_func_01 \
@@ -28,7 +28,9 @@ arySessionIDs01=(feat_level_1_func_01 \
                  feat_level_1_func_03 \
                  feat_level_1_func_04 \
                  feat_level_1_func_05 \
-                 feat_level_1_func_06)
+                 feat_level_1_func_06 \
+                 feat_level_1_func_07 \
+                 feat_level_1_func_08)
 
 # Array with the run IDs to be placed in the fsf files (first entry = run ID in
 # existing fsf file)
@@ -37,7 +39,9 @@ arySessionIDs02=(func_01 \
                  func_03 \
                  func_04 \
                  func_05 \
-                 func_06)
+                 func_06 \
+                 func_07 \
+                 func_08)
 #-------------------------------------------------------------------------------
 
 
