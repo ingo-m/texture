@@ -5,28 +5,52 @@ EV 2 --> cope2
 ...
 
 # EV 1 title
-set fmri(evtitle1) "kanizsa_static_sst"
+set fmri(evtitle1) "stimulus_sst"
 
 # EV 2 title
-set fmri(evtitle2) "kanizsa_static_trn"f
+set fmri(evtitle2) "stimulus_trn"
 
 # EV 3 title
-set fmri(evtitle3) "rotated_static_sst"
+set fmri(evtitle3) "target"
 
-# EV 4 title
-set fmri(evtitle4) "rotated_static_trn"
+Between-runs design, stimulus conditions need to be accounted for at 2nd level
+feat.
 
-# EV 5 title
-set fmri(evtitle5) "kanizsa_flicker_sst"
+bright_square_txtr_sst:
 
-# EV 6 title
-set fmri(evtitle6) "kanizsa_flicker_trn"
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_01.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_03.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_05.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_07.feat/stats/cope1
 
-# EV 7 title
-set fmri(evtitle7) "rotated_flicker_sst"
+bright_square_txtr_trn:
 
-# EV 8 title
-set fmri(evtitle8) "rotated_flicker_trn"
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_01.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_03.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_05.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_07.feat/stats/cope2
 
-# EV 9 title
-set fmri(evtitle9) "target"
+full_screen_txtr_sst:
+
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_02.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_04.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_06.feat/stats/cope1
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_08.feat/stats/cope1
+
+full_screen_txtr_trn:
+
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_02.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_04.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_06.feat/stats/cope2
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_08.feat/stats/cope2
+
+target:
+
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_01.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_02.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_03.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_04.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_05.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_06.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_07.feat/stats/cope3
+PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_08.feat/stats/cope3

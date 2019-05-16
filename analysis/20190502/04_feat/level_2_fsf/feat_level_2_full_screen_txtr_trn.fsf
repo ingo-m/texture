@@ -30,13 +30,13 @@ set fmri(featwatcher_yn) 0
 set fmri(sscleanup_yn) 0
 
 # Output directory
-set fmri(outputdir) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_2_comb/feat_level_2_kanizsa_static_sst"
+set fmri(outputdir) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_2_comb/feat_level_2_full_screen_txtr_trn"
 
 # TR(s)
 set fmri(tr) 3
 
 # Total volumes
-set fmri(npts) 6
+set fmri(npts) 4
 
 # Delete volumes
 set fmri(ndelete) 0
@@ -45,7 +45,7 @@ set fmri(ndelete) 0
 set fmri(tagfirst) 1
 
 # Number of first-level analyses
-set fmri(multiple) 6
+set fmri(multiple) 4
 
 # Higher-level input type
 # 1 : Inputs are lower-level FEAT directories
@@ -254,7 +254,7 @@ set fmri(regstandard_dof) 12
 set fmri(regstandard_nonlinear_yn) 0
 
 # Control nonlinear warp field resolution
-set fmri(regstandard_nonlinear_warpres) 10
+set fmri(regstandard_nonlinear_warpres) 10 
 
 # High pass filter cutoff
 set fmri(paradigm_hp) 60
@@ -267,22 +267,16 @@ set fmri(totalVoxels) 62400
 set fmri(ncopeinputs) 0
 
 # 4D AVW data or FEAT directory (1)
-set feat_files(1) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_01.feat/stats/cope1"
+set feat_files(1) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_02.feat/stats/cope2"
 
 # 4D AVW data or FEAT directory (2)
-set feat_files(2) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_02.feat/stats/cope1"
+set feat_files(2) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_04.feat/stats/cope2"
 
 # 4D AVW data or FEAT directory (3)
-set feat_files(3) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_03.feat/stats/cope1"
+set feat_files(3) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_06.feat/stats/cope2"
 
 # 4D AVW data or FEAT directory (4)
-set feat_files(4) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_04.feat/stats/cope1"
-
-# 4D AVW data or FEAT directory (5)
-set feat_files(5) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_05.feat/stats/cope1"
-
-# 4D AVW data or FEAT directory (6)
-set feat_files(6) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_06.feat/stats/cope1"
+set feat_files(4) "PLACEHOLDER_FOR_DATA_PATHnii/feat_level_1_comb/func_08.feat/stats/cope2"
 
 # Add confound EVs text file
 set fmri(confoundevs) 0
@@ -328,24 +322,18 @@ set fmri(ortho1.0) 0
 set fmri(ortho1.1) 0
 
 # Higher-level EV value for EV 1 and input 1
-set fmri(evg1.1) 1.0
+set fmri(evg1.1) 1
 
 # Higher-level EV value for EV 1 and input 2
-set fmri(evg2.1) 1.0
+set fmri(evg2.1) 1
 
 # Higher-level EV value for EV 1 and input 3
-set fmri(evg3.1) 1.0
+set fmri(evg3.1) 1
 
 # Higher-level EV value for EV 1 and input 4
-set fmri(evg4.1) 1.0
+set fmri(evg4.1) 1
 
-# Higher-level EV value for EV 1 and input 5
-set fmri(evg5.1) 1.0
-
-# Higher-level EV value for EV 1 and input 6
-set fmri(evg6.1) 1.0
-
-# Setup Orthogonalisation at higher level?
+# Setup Orthogonalisation at higher level? 
 set fmri(level2orth) 0
 
 # Group membership for input 1
@@ -360,12 +348,6 @@ set fmri(groupmem.3) 1
 # Group membership for input 4
 set fmri(groupmem.4) 1
 
-# Group membership for input 5
-set fmri(groupmem.5) 1
-
-# Group membership for input 6
-set fmri(groupmem.6) 1
-
 # Contrast & F-tests mode
 # real : control real EVs
 # orig : control original EVs
@@ -373,10 +355,10 @@ set fmri(con_mode_old) real
 set fmri(con_mode) real
 
 # Display images for contrast_real 1
-set fmri(conpic_real.1) 0
+set fmri(conpic_real.1) 1
 
 # Title for contrast_real 1
-set fmri(conname_real.1) "stim"
+set fmri(conname_real.1) "group mean"
 
 # Real contrast_real vector 1 element 1
 set fmri(con_real1.1) 1

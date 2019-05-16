@@ -14,9 +14,8 @@ For transient resposne:
 
 GLM predictors:
 
-
-
-
+stimulus (generic predictor because of between-runs design, stimulus conditions
+need to be accounted for at 2nd level feat).
 
 target
 PLACEHOLDER_FOR_ANALYSIS_PATHFSL_MRI_Metadata/version_01/EV_func_01_Target.txt
