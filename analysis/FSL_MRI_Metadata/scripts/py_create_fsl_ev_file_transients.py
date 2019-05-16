@@ -23,7 +23,7 @@ pacman_anly_path = '/home/john/PhD/GitLab/texture/analysis/'
 
 # Input directory:
 strPathInput = (pacman_anly_path
-                + 'FSL_MRI_Metadata/version_01/')
+                + 'FSL_MRI_Metadata/version_01_transients/')
 
 # Output directory:
 strPathOutput = strPathInput
@@ -38,10 +38,11 @@ strFleNme = 'Run_{}_eventmatrix.txt'
 # Event types surface perception experiment:
 lstEventTypes = ['rest',
                  'target',
-                 'bright_square']
+                 'stimulus']
 
 # List of runs (excluding pRF mapping runs):
-lstRuns = ['01', '03', '05', '07']
+# lstRuns = list([str(x).zfill(2) for x in range(1,9)])
+lstRuns = ['01', '02', '03', '04', '05', '06', '07', '08']
 
 # The number of different event types in the event matrix file. For each type
 # a separate EV file will be created.
@@ -69,6 +70,13 @@ for idxRun in range(0, varNumRuns):
                          delimiter=' ',
                          skiprows=0,
                          usecols=(0, 1, 2))
+
+#    # The original aray was loaded as string. We create an array that contains
+#    # the timing information from the log file in floating point notation or
+#    # integer:
+#    aryData[:,0] = aryData[:,0].astype('float')
+#    aryData[:,1] = aryData[:,1].astype('float')
+#    aryData[:,2] = aryData[:,2].astype('float')
 
     # Number of events in the file:
     varNumTrial = len(aryData[:, 0])
@@ -101,14 +109,16 @@ for idxRun in range(0, varNumRuns):
                 varTmpCount = varTmpCount + 1
         print('------Number of occurences of event: ' + str(varTmpCount))
 
-        # Create output array:
-        aryOutput = np.ones([varTmpCount, 3])
+        # Create output array. Number of entries is twice the number of event
+        # occurences, in order to model both onset and offset of the event.
+        aryOutput = np.ones([(varTmpCount * 2), 3])
 
         # For loop that cycles through the lines of the event matrix file in
         # order to create the EV file. We need an index to access the output
         # array:
         varTmpCount = 0
         for idxTrial in range(0, varNumTrial):
+
             # Check whether the current lines corresponds to the current event
             # type (first column of the event matrix):
             varTmp = aryData[idxTrial, 0]
@@ -125,14 +135,28 @@ for idxRun in range(0, varNumRuns):
             # order to check whether the current line corresponds to the event
             # type:
             if int(idxCon + 1) == varTmp:
+
+                # ## Create EV file entry for ONSET response event
+
                 # First column of the output matrix (time point of start of
                 # event):
                 aryOutput[varTmpCount, 0] = aryData[idxTrial, 1]
-                # Second column of the output matrix (duration of the event):
-                aryOutput[varTmpCount, 1] = aryData[idxTrial, 2]
+
+                # ## Create EV file entry for OFFSET response event
+
+                # First column of the output matrix (time point of start of
+                # event):
+                aryOutput[(varTmpCount + 1), 0] = np.sum([aryData[idxTrial, 1],
+                                                          aryData[idxTrial, 2]])
+
+                # Second column of the output matrix (duration of the event)
+                # remains filled with ones (because the onset response is
+                # modelled as a transient event).
+
                 # The third column remains filled with ones.
+
                 # Increment the index:
-                varTmpCount = varTmpCount + 1
+                varTmpCount = varTmpCount + 2
 
         # Create file name:
         strTmpFilename = (strPathOutput +

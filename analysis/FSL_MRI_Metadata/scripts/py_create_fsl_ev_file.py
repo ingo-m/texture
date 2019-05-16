@@ -38,10 +38,11 @@ strFleNme = 'Run_{}_eventmatrix.txt'
 # Event types surface perception experiment:
 lstEventTypes = ['rest',
                  'target',
-                 'full_screen']
+                 'stimulus']
 
 # List of runs (excluding pRF mapping runs):
-lstRuns = ['02', '04', '06', '08']
+# lstRuns = list([str(x).zfill(2) for x in range(1,9)])
+lstRuns = ['01', '02', '03', '04', '05', '06', '07', '08']
 
 # The number of different event types in the event matrix file. For each type
 # a separate EV file will be created.
