@@ -1,0 +1,32 @@
+First level feat predictors
+
+EV 1 --> cope1
+EV 2 --> cope2
+...
+
+# EV 1 title
+set fmri(evtitle1) "kanizsa_static_sst"
+
+# EV 2 title
+set fmri(evtitle2) "kanizsa_static_trn"f
+
+# EV 3 title
+set fmri(evtitle3) "rotated_static_sst"
+
+# EV 4 title
+set fmri(evtitle4) "rotated_static_trn"
+
+# EV 5 title
+set fmri(evtitle5) "kanizsa_flicker_sst"
+
+# EV 6 title
+set fmri(evtitle6) "kanizsa_flicker_trn"
+
+# EV 7 title
+set fmri(evtitle7) "rotated_flicker_sst"
+
+# EV 8 title
+set fmri(evtitle8) "rotated_flicker_trn"
+
+# EV 9 title
+set fmri(evtitle9) "target"

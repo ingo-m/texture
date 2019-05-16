@@ -1,0 +1,10 @@
+Sustained AND transient predictors (i.e. one predictor for continuous response
+blocks, and a separate predictor for response onset and response offset).
+
+Design matrices (EV files):
+
+For sustained response:
+/home/john/PhD/GitLab/kanizsa/analysis/FSL_MRI_Metadata/version_01/
+
+For transient resposne:
+/home/john/PhD/GitLab/kanizsa/analysis/FSL_MRI_Metadata/version_01_transients/
