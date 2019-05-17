@@ -286,7 +286,7 @@ source ${strPathPrnt}07_pRF/03_upsample_retinotopy.sh
 date
 
 echo "---Automatic: Calculate overlap between voxel pRFs and stimulus."
-python ${strPathPrnt}07_pRF/04_PacMan_pRF_overlap.py
+python ${strPathPrnt}07_pRF/04_Square_pRF_overlap.py
 date
 #-------------------------------------------------------------------------------
 

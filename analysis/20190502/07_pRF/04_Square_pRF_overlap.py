@@ -91,77 +91,28 @@ varSdMin = 0.2
 varSupSmp = 5.0
 
 # -----------------------------------------------------------------------------
-# ROI definitions
-# Coordinates are in (x, y) convention.
-#
-# (1) Incuder
-# Circular ROIs covering inducer stimuli.
-# - centerd on (-6.0, 3.0), radius = 1.5
-# - centerd on (-0.5, 3.0), radius = 1.5
-# - centerd on (-6.0, -3.0), radius = 1.5
-# - centerd on (-0.5, -3.0), radius = 1.5
-#
-# (2) Surface
-# Circular ROI covering central surface of Kanizsa rectangle.
-# Centred on (-2.75, 0.0), radius = 2.0
-#
-# (3) Edge
-# - Centred on (-6.0, 0.0), width = 1.0, height = 2.0
-# - Centred on (-2.75, +3.0), width = 1.5, height = 1.0
-# - Centred on (-2.75, -3.0), width = 1.5, height = 1.0
-# Note: there is no edge ROI centred on (-0.5, 0.0) because this would touch
-# the fixation spot.
-#
-# (4)
-# Background, right visual hemifield.
-# - x > 2.0
+# In the texture/uniform control experiment, the central square has slightly
+# different dimensions than in the previous sessions of the surface experiment,
+# in order to match the area of the PacMan stimulus. The edge length of the
+# square in the texture/uniform control experiment is 2 * 3.325 (as opposed to
+# (2 * 3 in the previous surface experiments). The dimensions of the ROIs are
+# adjusted accordingly.
 # -----------------------------------------------------------------------------
 
-# Position (x & y displacement from origin) of Kanizsa inducers (Pac-Man)
-# [degree of visual angle]:
-# lstPosKnz = [(-6.0, 3.0),
-#              (-0.5, 3.0),
-#              (-6.0, -3.0),
-#              (-0.5, -3.0)]
-# Thus, the centre of the stimulus configuration is at x-coordinate
-# -(6.0 - 0.5) * 0.5 = -2.75 [deg of visual angel]. The y-coordinate of the
-# centre of the stimulus configuration is zero.
-varCntrX = -3.25
-varCntrY = 0.0
+# Limits of central square ROI:
+tplLimCntrX = (-2.325, 2.325)
+tplLimCntrY = (-2.325, 2.325)
 
-# (1)
-# Coordinates of SURFACE ROI:
-tplSrfCnt = (-3.25, 0.0)
-# Radius of surface ROI:
-varSrfRds = 2.0
+# Radius of central region to avoid (fixation dot):
+varFix = 0.75
 
-# (2)
-# Coordinates of rectangular EDGE ROIs, format:
-# [[(x-min, x-max), (y-min, y-max)]]
-lstEdgCrd = [[(-6.5, -5.5), (-1.0, 1.0)],
-             [(-3.75, -2.75), (2.5, 3.5)],
-             [(-3.75, -2.75), (-3.5, -2.5)]]
+# Limits of border ROI (border is at 3.325 deg):
+lstLimEdgX = [(-3.825, -2.825), (2.825, 3.825)]
+lstLimEdgY = [(-3.825, -2.825), (2.825, 3.825)]
 
-# (3)
-# Coordinates of centres of circular INDUCER ROIs
-lstIndCnt = [(-6.0, 3.0),
-             (-0.5, 3.0),
-             (-6.0, -3.0),
-             (-0.5, -3.0)]
-# Radius of inducer ROI:
-varIndRds = 1.5
-
-# (4)
-# Limit of BACKGROUND ROI (x > ...):
-varBkgrLim01 = 2.0
-
-# (5)
-# Limits of LEFT half of BACKGROUND ROI (closer to fixation):
-tplBkgrLft = (2.0, 5.0)
-
-# (6)
-# Limits of RIGHT half of BACKGROUND ROI (more peripheral):
-tplBkgrRgt = (5.0, 8.3)
+# Limits of background ROI:
+lstLimBckX = [(-8.3, -5.0), (5.0, 8.3)]
+lstLimBckY = [(-5.19, 5.19), (-5.19, 5.19)]
 
 # Overlap is calculated with an R2 value above the following threshold:
 varThrR = 0.1
@@ -372,14 +323,6 @@ aryNiiY, hdrNiiY, aryAffY = fncLoadNii(strNiiY)
 aryNiiSd, hdrNiiSd, aryAffSd = fncLoadNii(strNiiSd)
 aryNiiR2, hdrNiiR2, aryAffR2 = fncLoadNii(strNiiR2)
 
-# Vectors with x- and y-coordinates represented in the super-sampled model of
-# the visual space:
-vecXcords = np.linspace(varXmin, varXmax, int(varXstep * varSupSmp))
-vecYcords = np.linspace(varYmin, varYmax, int(varYstep * varSupSmp))
-
-# Dimensions of nii data:
-vecNiiShp = aryNiiX.shape
-
 print('------Preparing arrays')
 
 # Visual space in Cartesian coordinates:
@@ -387,122 +330,120 @@ print('------Preparing arrays')
     np.linspace(varXmin, varXmax, int(varXstep * varSupSmp)),
     np.linspace(varYmin, varYmax, int(varYstep * varSupSmp)))
 
-# (1)
-# Surface ROI (centre of Kanizsa rectangle).
-
 # Calculate the distance between each point in the visual space to the centre
-# of the stimulus configuration ("If we want to find the distance between two
-# points in a coordinate plane we use a formula that is based on the
-# Pythagorean Theorem were (x1,y1) and (x2,y2) are the coordinates and d marks
-# the distance: d = sqrt( (x2 - x1)^2 + (y2 - y1)^2 "
+# of the visual space ("If we want to find the distance between two points in
+# a coordinate plane we use a formula that is based on the Pythagorean Theorem
+# were (x1,y1) and (x2,y2) are the coordinates and d marks the distance:
+# d = sqrt( (x2 - x1)^2 + (y2 - y1)^2 "
 # Source:
 #   http://www.mathplanet.com/education/geometry/points,-lines,-planes-and-
 #   angles/finding-distances-and-midpoints).
-#
-aryDist01 = np.sqrt(
-                    ((arySpaceXcrt - varCntrX) ** 2.0
-                     + (arySpaceYcrt - varCntrY) ** 2.0),
-                    dtype=np.float32)
-aryRoiSrf = np.less_equal(aryDist01, varSrfRds).astype(np.float64)
+aryDist = np.sqrt(((arySpaceXcrt - 0) ** 2 + (arySpaceYcrt - 0) ** 2),
+                  dtype=np.float32)
 
-# (2)
-# Edge ROIs (illusory contours of Kanizsa rectangle).
-aryRoiEdg = np.zeros(arySpaceXcrt.shape, dtype=bool)
-for lstTmp in lstEdgCrd:
-    aryTmp01 = np.greater_equal(arySpaceXcrt, lstTmp[0][0])
-    aryTmp02 = np.less_equal(arySpaceXcrt, lstTmp[0][1])
-    aryTmp03 = np.greater_equal(arySpaceYcrt, lstTmp[1][0])
-    aryTmp04 = np.less_equal(arySpaceYcrt, lstTmp[1][1])
-    aryTmp05 = np.logical_and(
-                              np.logical_and(aryTmp01, aryTmp02),
-                              np.logical_and(aryTmp03, aryTmp04)
-                              )
-    aryRoiEdg = np.logical_or(aryRoiEdg, aryTmp05)
-# Cast final ROI definition to float64:
-aryRoiEdg = aryRoiEdg.astype(np.float64)
+# Matrices representing the relevant regions of the stimulus
 
-# (3)
-# Inducer ROIs.
-aryRoiInd = np.zeros(arySpaceXcrt.shape, dtype=bool)
-for tplTmp in lstIndCnt:
-    # Distances from current inducer centre:
-    aryDist02 = np.sqrt(
-                        ((arySpaceXcrt - tplTmp[0]) ** 2.0
-                         + (arySpaceYcrt - tplTmp[1]) ** 2.0),
-                        dtype=np.float32)
-    aryTmp06 = np.less_equal(aryDist02, varIndRds)
-    aryRoiInd = np.logical_or(aryRoiInd, aryTmp06)
-# Cast final ROI definition to float64:
-aryRoiInd = aryRoiInd.astype(np.float64)
+# Mask for central square:
+aryLgcCntr = np.logical_and(
+                            np.logical_and(
+                                           np.greater(arySpaceXcrt,
+                                                      tplLimCntrX[0]),
+                                           np.less(arySpaceXcrt,
+                                                   tplLimCntrX[1])
+                                           ),
+                            np.logical_and(
+                                           np.greater(arySpaceYcrt,
+                                                      tplLimCntrY[0]),
+                                           np.less(arySpaceYcrt,
+                                                   tplLimCntrY[1])
+                                           )
+                            ).astype(np.float64)
 
-# (4)
-# Background ROI.
-aryRoiBkgr01 = np.greater_equal(arySpaceXcrt, varBkgrLim01).astype(np.float64)
+# Avoid fixation dot:
+aryLgcCntr[aryDist < varFix] = 0.0
 
-# (5)
-# LEFT half of BACKGROUND ROI (closer to fixation):
-aryRoiBkgrLft = np.logical_and(
-                               np.greater_equal(
-                                                arySpaceXcrt,
-                                                tplBkgrLft[0]
-                                                ),
-                               np.less_equal(
-                                             arySpaceXcrt,
-                                             tplBkgrLft[1]
-                                             )
-                               ).astype(np.float64)
+# Mask for full screen:
+aryLgcFull = np.ones(arySpaceXcrt.shape, dtype=np.float64)
 
-# (6)
-# RIGHT half of BACKGROUND ROI (more peripheral):
-aryRoiBkgrRgt = np.logical_and(
-                               np.greater_equal(
-                                                arySpaceXcrt,
-                                                tplBkgrRgt[0]
-                                                ),
-                               np.less_equal(
-                                             arySpaceXcrt,
-                                             tplBkgrRgt[1]
-                                             )
-                               ).astype(np.float64)
+# Avoid fixation dot:
+aryLgcFull[aryDist < varFix] = 0.0
 
-# (7)
-# The actual Kanizsa rectangle (for debudding purposes).
-aryTmp01 = np.greater_equal(arySpaceXcrt, lstIndCnt[0][0])
-aryTmp02 = np.less_equal(arySpaceXcrt, lstIndCnt[1][0])
-aryTmp03 = np.greater_equal(arySpaceYcrt, lstIndCnt[2][1])
-aryTmp04 = np.less_equal(arySpaceYcrt, lstIndCnt[1][1])
-aryTmp05 = np.logical_and(
-                          np.logical_and(aryTmp01, aryTmp02),
-                          np.logical_and(aryTmp03, aryTmp04)
-                          )
-# Cast final ROI definition to float64:
-aryRoiKnz = aryTmp05.astype(np.float64)
+# Mask for edge - restrict outer regions:
+aryLgcEdg01 = np.logical_and(
+                             np.greater(arySpaceXcrt,
+                                        lstLimEdgX[0][0]),
+                             np.less(arySpaceXcrt,
+                                     lstLimEdgX[1][1])
+                             )
+aryLgcEdg02 = np.logical_and(
+                             np.greater(arySpaceYcrt,
+                                        lstLimEdgY[0][0]),
+                             np.less(arySpaceYcrt,
+                                     lstLimEdgY[1][1])
+                             )
+aryLgcEdg03 = np.logical_and(aryLgcEdg01, aryLgcEdg02).astype(np.float64)
+
+# Mask for edge - restrict inner regions:
+aryLgcEdg04 = np.logical_and(
+                             np.greater(arySpaceXcrt,
+                                        lstLimEdgX[0][1]),
+                             np.less(arySpaceXcrt,
+                                     lstLimEdgX[1][0])
+                             )
+aryLgcEdg05 = np.logical_and(
+                             np.greater(arySpaceYcrt,
+                                        lstLimEdgY[0][1]),
+                             np.less(arySpaceYcrt,
+                                     lstLimEdgY[1][0])
+                             )
+aryLgcEdg06 = np.logical_and(aryLgcEdg04, aryLgcEdg05).astype(np.float64)
+
+# Final edge ROI:
+aryLgcEdg = np.subtract(aryLgcEdg03, aryLgcEdg06)
+
+# Mask for periphery (left and right edges of screen):
+aryLgcBck = np.logical_or(
+                          np.logical_and(
+                                         np.greater(arySpaceXcrt,
+                                                    lstLimBckX[0][0]),
+                                         np.less(arySpaceXcrt,
+                                                 lstLimBckX[0][1])
+                                         ),
+                          np.logical_and(
+                                         np.greater(arySpaceXcrt,
+                                                    lstLimBckX[1][0]),
+                                         np.less(arySpaceXcrt,
+                                                 lstLimBckX[1][1])
+                                         ),
+                          ).astype(np.float64)
+
+# Vectors with x- and y-coordinates represented in the super-sampled model of
+# the visual space:
+vecXcords = np.linspace(varXmin, varXmax, (varXstep * varSupSmp))
+vecYcords = np.linspace(varYmin, varYmax, (varYstep * varSupSmp))
+
+# Dimensions of nii data:
+vecNiiShp = aryNiiX.shape
 # *****************************************************************************
 
 
 # *****************************************************************************
 # *** Loop through ROIs (central square, edge, periphery)
 
-for idxRoi in range(6):  #noqa
+for idxRoi in range(4):  #noqa
 
     if idxRoi == 0:
-        # Surface ROI (centre of Kanizsa rectangle).
-        aryLgcStim = aryRoiSrf
+        # Central square
+        aryLgcStim = aryLgcCntr
     elif idxRoi == 1:
-        # Edge ROI (illusory contours of Kanizsa rectangle).
-        aryLgcStim = aryRoiEdg
+        # Edge
+        aryLgcStim = aryLgcEdg
     elif idxRoi == 2:
-        # Inducer ROI.
-        aryLgcStim = aryRoiInd
+        # Periphery (left and right ends of screen)
+        aryLgcStim = aryLgcBck
     elif idxRoi == 3:
-        # Background ROI.
-        aryLgcStim = aryRoiBkgr01
-    elif idxRoi == 4:
-        # Left half of background ROI.
-        aryLgcStim = aryRoiBkgrLft
-    elif idxRoi == 5:
-        # Right half of background ROI.
-        aryLgcStim = aryRoiBkgrRgt
+        # Full screen
+        aryLgcStim = aryLgcFull
 
     # *************************************************************************
     # *** Calculation of stimulus-pRF overlap
@@ -704,23 +645,17 @@ for idxRoi in range(6):  #noqa
                                   )
 
     if idxRoi == 0:
-        # Surface ROI (centre of Kanizsa rectangle).
-        strHmf = 'centre'
+        # Central square
+        strHmf = 'square_centre'
     elif idxRoi == 1:
-        # Edge ROI (illusory contours of Kanizsa rectangle).
-        strHmf = 'edge'
+        # Edge
+        strHmf = 'square_edge'
     elif idxRoi == 2:
-        # Inducer ROI.
-        strHmf = 'inducer'
-    elif idxRoi == 3:
-        # Background ROI:.
+        # Periphery (left and right ends of screen)
         strHmf = 'background'
-    elif idxRoi == 4:
-        # Left half of background ROI:.
-        strHmf = 'left_bckg'
-    elif idxRoi == 5:
-        # Right half of background ROI:.
-        strHmf = 'right_bckg'
+    elif idxRoi == 3:
+        # Full screen (avoiding fixation dot)
+        strHmf = 'fullscreen'
 
     # Save nii to disk:
     nib.save(niiOtRatio, (strNiiOt + 'ovrlp_ratio_' + strHmf + '.nii.gz'))
