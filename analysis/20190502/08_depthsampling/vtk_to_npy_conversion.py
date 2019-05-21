@@ -37,14 +37,10 @@ pacman_data_path = str(os.environ['pacman_data_path'])
 pacman_sub_id = str(os.environ['pacman_sub_id'])
 
 # List of directories with vtk files to be converted:
-lstDir = [(pacman_data_path + pacman_sub_id + '/cbs/rh_era/kanizsa_flicker'),
-          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/kanizsa_static'),
-          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/rotated_flicker'),
-          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/rotated_static'),
-          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/kanizsa_flicker'),
-          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/kanizsa_static'),
-          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/rotated_flicker'),
-          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/rotated_static')]
+lstDir = [(pacman_data_path + pacman_sub_id + '/cbs/lh_era/bright_square'),
+          (pacman_data_path + pacman_sub_id + '/cbs/lh_era/full_screen'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/bright_square'),
+          (pacman_data_path + pacman_sub_id + '/cbs/rh_era/full_screen')]
 
 # Number of cortical depths:
 varNumDpth = 11
