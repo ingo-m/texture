@@ -15,14 +15,11 @@ Control experiment, with two conditions in separate runs.
     condition tests for an effect of texture, irrespective of luminance.
 
 The analysis pipeline is largely adapted from control experiments 20181128
-and 20190207 (some aspects are redundant).
+and 20190207 (some aspects may be redundant).
 
-pRF overlap with ROIs: square_centre, square_edge, background, (diamond),
-                       pacman_centre, pacman_edge
+pRF overlap with ROIs: square_centre, square_edge, background, fullscreen
 
 for experimental conditions: bright_square_txtr, full_screen_txtr
-
-(Diamond and PacMan ROIs are redundant.)
 
 Subject 20190502.
 -------------------------------------------------------------------------------
